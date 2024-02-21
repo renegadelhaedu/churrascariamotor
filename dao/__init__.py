@@ -1,5 +1,5 @@
 def verificarlogin(nome, senha):
-    if nome == 'rene' and senha == '123456':
+    if nome == 'rene@rene.com' and senha == '123':
         return True
     else:
         return False
