@@ -2,7 +2,10 @@
 <head>
   <meta charset="utf-8">
   <title>Ciência da Computação</title>
+  <link rel="stylesheet" type="text/css" href="../static/style2.css">
+  <!--
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style2.css') }}">
+  -->
 </head>
 
 <body>
@@ -49,7 +52,7 @@
             <div class="formbg-inner padding-horizontal--48">
               <span class="padding-bottom--15">Logar no sistema</span>
 
-              <form action="/cadastrar" id="stripe-login" method="post">
+              <form action="/login" id="stripe-login" method="post">
                 <div class="field padding-bottom--24">
                   <label for="email">Email</label>
                   <input type="email" name="nome">

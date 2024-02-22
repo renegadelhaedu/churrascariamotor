@@ -1,17 +1,25 @@
 import pandas as pd
+import plotly.express as px
 
 def analisar():
     dados = pd.read_html('https://pt.wikipedia.org/wiki/Lista_de_munic%C3%ADpios_do_Brasil_por_taxa_de_homic%C3%ADdios')
-
     mais250 = dados[0]
     menores = dados[1]
-
     print(dados[0])
 
 def analisar2():
     dados = pd.read_csv('dadosindicadoresPB3.csv')
-    dados.drop(columns=['code'],inplace=True)
+    #excluir colunas
+    dados.drop(columns=['code','cvp'], inplace=True)
     return dados
+
+def exibirmapacorrelacoes(data):
+    data.drop(columns=['municipio'], inplace=True)
+
+    fig = px.imshow(data.corr())
+    return fig
+
+
 
 '''
 ['Municípios', 'Gentílico',
