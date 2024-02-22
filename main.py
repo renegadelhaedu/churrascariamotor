@@ -11,16 +11,31 @@ def cadastrar_usuario():
     senha = str(request.form.get('senha'))
 
     if dao.verificarlogin(nome, senha):
-        dados = da.analisar2()
-        dados.drop(dados.sort_values(by=['cvli'], ascending=False).head(3).index, inplace=True)
-        dados.drop(dados.sort_values(by=['rendapercapita'], ascending=False).head(10).index, inplace=True)
-        dados.drop(dados.sort_values(by=['rendapercapita'], ascending=True).head(2).index, inplace=True)
-        fig = px.scatter(dados, x='rendapercapita', y='cvli', hover_data=['municipio'])
-        fig2 = da.exibirmapacorrelacoes(da.analisar2())
-
-        return render_template('verificado.html', login=nome, plot=fig.to_html(), mapa=fig2.to_html())
+        return render_template('menu.html')
     else:
-        return render_template('index.html')
+        return render_template('index2.html')
+
+@app.route('/grafvioleciapib')
+def gerarGrafViolenciaPib():
+    dados = da.lerdados()
+    dados.drop(dados.sort_values(by=['cvli'], ascending=False).head(3).index, inplace=True)
+    dados.drop(dados.sort_values(by=['rendapercapita'], ascending=False).head(10).index, inplace=True)
+    dados.drop(dados.sort_values(by=['rendapercapita'], ascending=True).head(2).index, inplace=True)
+
+    fig = px.scatter(dados, x='rendapercapita', y='cvli', hover_data=['municipio'])
+    return render_template('grafviolenciapib.html', plot=fig.to_html())
+
+@app.route('/grafcorrelacao')
+def gerarGrafCorrelacao():
+    dados = da.lerdados()
+    fig2 = da.exibirmapacorrelacoes(dados)
+
+    return render_template('grafcorrelacao.html', mapa=fig2.to_html())
+
+
+@app.route('/menu')
+def menu():
+    return render_template('menu.html')
 
 
 @app.route('/')

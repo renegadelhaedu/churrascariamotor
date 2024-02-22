@@ -7,15 +7,14 @@ def analisar():
     menores = dados[1]
     print(dados[0])
 
-def analisar2():
+def lerdados():
     dados = pd.read_csv('dadosindicadoresPB3.csv')
     #excluir colunas
-    dados.drop(columns=['code','cvp'], inplace=True)
+    dados.drop(columns=['code'], inplace=True)
     return dados
 
 def exibirmapacorrelacoes(data):
     data.drop(columns=['municipio'], inplace=True)
-
     fig = px.imshow(data.corr())
     return fig
 
