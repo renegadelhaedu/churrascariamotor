@@ -8,6 +8,13 @@
 <body>
     <h1>Gráfico da Violência X PIB</h1>
 
+    <form action="/grafvioleciapib" METHOD="POST">
+        <label>Digite a quantidade de cidades mais violentas que você quer filtrar</label>
+        <input type="text" name="valor">
+        <button type="submit">Filtrar</button>
+
+    </form>
+
     {{plot|safe}}
 
 </body>

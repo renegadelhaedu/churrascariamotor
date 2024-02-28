@@ -17,9 +17,14 @@ def cadastrar_usuario():
 
 @app.route('/grafvioleciapib')
 def gerarGrafViolenciaPib():
+    if request.method == 'POST':
+        filtro = int(request.form.get('valor'))
+    else:
+        filtro = 10
+
     dados = da.lerdados()
     dados.drop(dados.sort_values(by=['cvli'], ascending=False).head(3).index, inplace=True)
-    dados.drop(dados.sort_values(by=['rendapercapita'], ascending=False).head(10).index, inplace=True)
+    dados.drop(dados.sort_values(by=['rendapercapita'], ascending=False).head(filtro).index, inplace=True)
     dados.drop(dados.sort_values(by=['rendapercapita'], ascending=True).head(2).index, inplace=True)
 
     fig = px.scatter(dados, x='rendapercapita', y='cvli', hover_data=['municipio'])
