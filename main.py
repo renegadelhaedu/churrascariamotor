@@ -9,8 +9,8 @@ app = Flask(__name__)
 def cadastrar_usuario():
     nome = str(request.form.get('nome'))
     senha = str(request.form.get('senha'))
-
-    if dao.verificarlogin(nome, senha):
+    if (dao
+            .verificarlogin(nome, senha, dao.conectardb())):
         return render_template('menu.html')
     else:
         return render_template('index2.html')

@@ -1,6 +1,6 @@
 import psycopg2
-def verificarlogin(nome, senha):
-    conexao = conectardb()
+def verificarlogin(nome, senha, conexao):
+
     cur = conexao.cursor()
     cur.execute(f"SELECT count(*) FROM usuarios WHERE login = '{nome}' AND senha = '{senha}'")
     recset = cur.fetchall()
@@ -9,8 +9,6 @@ def verificarlogin(nome, senha):
         return True
     else:
         return False
-
-
 
 def conectardb():
     con = psycopg2.connect(
