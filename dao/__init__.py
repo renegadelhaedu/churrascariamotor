@@ -21,7 +21,7 @@ def conectardb():
     return con
 
 
-def inserirDB(login, senha, conexao):
+def inseriruser(login, senha, conexao):
     cur = conexao.cursor()
     exito = False
     try:
