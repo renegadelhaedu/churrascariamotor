@@ -50,36 +50,39 @@
         <div class="formbg-outer">
           <div class="formbg">
             <div class="formbg-inner padding-horizontal--48">
+              <span class="padding-bottom--15">Escolher indicadores</span>
 
-              <div class="field padding-bottom--24">
-                  <input type="submit" name="submit" value="Gerar gráfico de violência x Pib" onclick="window.location.href='/grafvioleciapib';">
-              </div>
-              <div class="field padding-bottom--24">
-                  <input type="submit" name="submit" value="Gerar Matriz de Correlação" onclick="window.location.href='/grafcorrelacao';">
-              </div>
-              <div class="field padding-bottom--24">
-                  <input type="submit" name="submit" value="Municípios com melhor Educação" onclick="window.location.href='/melhoresedu';">
-              </div>
-              <div class="field padding-bottom--24">
-                  <input type="submit" name="submit" value="Gerar Correlação de indicadores macro" onclick="window.location.href='/correlacaoindicadores';">
-              </div>
-              <div class="field padding-bottom--24">
-                  <input type="submit" name="submit" value="Adicionar mais funcionalidades" onclick="window.location.href='/grafcorrelacao';">
-              </div>
-              <div class="field padding-bottom--24">
-                  <input type="submit" name="submit" value="Adicionar mais funcionalidades" onclick="window.location.href='/grafcorrelacao';">
-              </div>
-              <div class="field padding-bottom--24">
-                  <input type="submit" name="submit" value="Adicionar mais funcionalidades" onclick="window.location.href='/grafcorrelacao';">
-              </div>
-            </div>
-          </div>
-          <div class="footer-link padding-top--24">
-            <span>Colocar algum link <a href="">Sign up</a></span>
-            <div class="listing padding-top--24 padding-bottom--24 flex-flex center-center">
+              <form action="/correlacaoindicadores" id="stripe-login" method="post">
+                <div class="field padding-bottom--24">
+                  <select name="indicador1">
+                      <option value="selic">Selic</option>
+                      <option value="ipca">IPCA</option>
+                      <option value="pib">PIB</option>
+                  </select>
+                </div>
+                <div class="field padding-bottom--24">
+                  <div class="grid--50-50">
+                  <select name="indicador2">
+                      <option value="selic">Selic</option>
+                      <option value="ipca">IPCA</option>
+                      <option value="pib">PIB</option>
+                  </select>
+                  </div>
+                </div>
+
+                <div class="field padding-bottom--24">
+                  <input type="submit" name="submit" value="Calcular Correlação">
+                </div>
+
+              </form>
+
+              <a style="color:red">{{ msg }}</a>
+
 
             </div>
+
           </div>
+
         </div>
       </div>
     </div>

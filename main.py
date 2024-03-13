@@ -5,6 +5,19 @@ import plotly.express as px
 
 app = Flask(__name__)
 
+
+@app.route('/correlacaoindicadores', methods=['GET', 'POST'])
+def calcular_correlacao_individual():
+    if request.method == 'GET':
+        return render_template('escolherindicadores.html')
+    else:
+        ind1 = request.form.get('indicador1')
+        ind2 = request.form.get('indicador2')
+        correlacao = da.correlacionar_indicadores(ind1, ind2)
+
+        return f'<h1>{correlacao}</h1>'
+
+
 @app.route('/cadastrarusuario', methods=['GET', 'POST'])
 def redirecionar_cadastro_user():
     if request.method == 'GET':
