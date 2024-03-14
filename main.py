@@ -27,8 +27,9 @@ def calcular_correlacao_individual():
         ind2 = request.form.get('indicador2')
         dados, correlacao = da.correlacionar_indicadores(ind1, ind2)
         dados.columns = [ind1, ind2] #renomeado as colunas
-
-        fig = px.line(dados, x=dados.index, y=dados[ind1])
+        #normalizei os dados
+        dados = (dados-dados.min())/(dados.max()-dados.min())
+        fig = px.line(dados, x=dados.index, y=list(dados.columns))
         return render_template('correlacaoresultado.html', plot=fig.to_html(), valor=correlacao, ind1=ind1, ind2=ind2)
 
 #        return f'<h1>{correlacao}</h1>'
