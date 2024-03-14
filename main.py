@@ -6,6 +6,18 @@ import plotly.express as px
 app = Flask(__name__)
 
 
+@app.route('/salvarcorrelacaobd', methods=['POST'])
+def salvarcorrelacao():
+    ind1 = request.form.get('ind1')
+    ind2 = request.form.get('ind2')
+    correlacao = request.form.get('valorcorrelacao')
+
+    if dao.insert_correlacao(dao.conectardb(), ind1, ind2, correlacao):
+        return render_template('paginasucesso.html')
+    else:
+        return render_template('paginaerro.html')
+
+
 @app.route('/correlacaoindicadores', methods=['GET', 'POST'])
 def calcular_correlacao_individual():
     if request.method == 'GET':
@@ -13,9 +25,13 @@ def calcular_correlacao_individual():
     else:
         ind1 = request.form.get('indicador1')
         ind2 = request.form.get('indicador2')
-        correlacao = da.correlacionar_indicadores(ind1, ind2)
+        dados, correlacao = da.correlacionar_indicadores(ind1, ind2)
+        dados.columns = [ind1, ind2] #renomeado as colunas
 
-        return f'<h1>{correlacao}</h1>'
+        fig = px.line(dados, x=dados.index, y=dados[ind1])
+        return render_template('correlacaoresultado.html', plot=fig.to_html(), valor=correlacao, ind1=ind1, ind2=ind2)
+
+#        return f'<h1>{correlacao}</h1>'
 
 
 @app.route('/cadastrarusuario', methods=['GET', 'POST'])

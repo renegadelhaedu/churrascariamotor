@@ -32,7 +32,7 @@ def correlacionar_indicadores(indicador1, indicador2):
 
     geral = pd.concat([dados1, dados2], axis=1)
 
-    return geral.corr().values[0][1]
+    return (geral, geral.corr().values[0][1])
 
 
 def analisar():
